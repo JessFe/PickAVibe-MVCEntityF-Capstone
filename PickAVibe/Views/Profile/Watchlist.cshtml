@@ -20,17 +20,18 @@
 @foreach (var movie in Model)
 {
     <div class="row my-4">
-        <div class="col-3">
+        <div class="col-12 col-sm-10 col-md-4 col-lg-3 d-flex align-items-center">
             <img src="@Url.Content("~/Content/assets/posterimg/" + movie.PosterImg)" alt="@movie.Title poster" class="rounded-3" style="width: 100%;" />
 
         </div>
-        <div class="col-9">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-9 mt-2 mb-3 my-md-1">
             <h3 class="mov-title">@movie.Title</h3>
             <span class="badge text-bg-1 m-0">@movie.Year</span>
             <span class="mx-1">•</span>
             <span class="badge text-bg-1">@movie.Duration min</span>
-            
-            <p class="my-3">@movie.Description</p>
+
+            <p class="d-none d-md-block my-3">@movie.Description</p>
+            <p class="small d-md-none my-3">@movie.Description</p>
 
             @if (!String.IsNullOrEmpty(movie.TrailerURL))
             {

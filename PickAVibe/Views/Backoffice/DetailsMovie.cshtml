@@ -5,7 +5,7 @@
 }
 
 <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-12 col-md-8 col-lg-7 col-xl-6">
 
         <div class="card mb-3">
 
@@ -43,7 +43,8 @@
                                 Story:
                             </td>
                             <td class="py-2">
-                                <p class="card-text">@Model.Description</p>
+                                <p class="card-text d-none d-sm-block">@Model.Description</p>
+                                <p class="card-text small d-block d-sm-none">@Model.Description</p>
                             </td>
                         </tr>
                         <tr class="border-bottom">
@@ -53,7 +54,8 @@
                             <td class="py-2">
                                 @if (!string.IsNullOrEmpty(Model.TrailerURL))
                                 {
-                                    <p class="card-text">@Model.TrailerURL</p>
+                                    <p class="card-text d-none d-sm-block">@Model.TrailerURL</p>
+                                    <p class="card-text small d-block d-sm-none">@Model.TrailerURL</p>
 
                                     <iframe class="rounded-3" width="auto" height="200px" src="@Model.TrailerURL" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

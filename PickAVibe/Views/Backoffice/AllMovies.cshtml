@@ -16,15 +16,16 @@
 
     <div class="d-flex justify-content-between">
         <p class="d-flex align-items-center m-0">
-            <span class="me-2">Search: </span>
+            <span class="d-none d-sm-inline me-2">Search: </span>
             @Html.TextBox("searchString")
             <input type="submit" value="Search" class="btn btn-1 btn-sm ms-2" />
         </p>
-        <div>
+        <div class="d-flex align-items-center">
             <button id="goBackButton" class="btn btn-outline-1 btn-sm">
                 <i class="bi bi-arrow-left-short"></i> Back
             </button>
-            <a href="@Url.Action("AddMovie")" class="btn btn-1 btn-sm px-3"><i class="bi bi-plus-square"></i> New Movie</a>
+            <a href="@Url.Action("AddMovie")" class="btn btn-1 btn-sm px-3 ms-1 d-none d-sm-inline"><i class="bi bi-plus-square"></i> New Movie</a>
+            <a href="@Url.Action("AddMovie")" class="btn btn-1 btn-sm px-2 ms-1 d-inline d-sm-none"><i class="bi bi-plus-square"></i> Movie</a>
         </div>
 
     </div>
@@ -37,8 +38,8 @@
             <th>Year</th>
             <th>Time</th>
             <th>Story</th>
-            <th>Poster</th>
-            <th>Trailer</th>
+            <th><i class="bi bi-image"></i></th>
+            <th><i class="bi bi-camera-reels"></i></th>
             <th class="rounded-end-3"><i class="bi bi-gear"></i></th>
         </tr>
     </thead>
@@ -46,8 +47,10 @@
         @foreach (var movie in Model)
         {
             <tr>
-                <td class="mov-title ps-3">@Html.DisplayFor(modelItem => movie.Title)</td>
-
+                <td class="mov-title small ps-3">
+                    <span class="d-none d-sm-block">@Html.DisplayFor(modelItem => movie.Title)</span>
+                    <span class="d-block d-sm-none small">@Html.DisplayFor(modelItem => movie.Title)</span>
+                </td>
                 <td class="text-light text-opacity-50 small font-monospace">@movie.Year</td>
                 <td class="text-light text-opacity-50 small font-monospace">@movie.Duration'</td>
                 <td class="small font-monospace">
@@ -81,7 +84,7 @@
                     }
                 </td>
                 <td>
-                    <a href="@Url.Action("DetailsMovie", "Backoffice", new { id = movie.MovieID })" class="btn btn-1 btn-sm"><i class="bi bi-info-square"></i></a>
+                    <a href="@Url.Action("DetailsMovie", "Backoffice", new { id = movie.MovieID })" class="btn btn-1 btn-sm mb-1 m-xl-0"><i class="bi bi-info-square"></i></a>
                     <a href="@Url.Action("EditMovie", "Backoffice", new { id = movie.MovieID })" class="btn btn-outline-1 btn-sm"><i class="bi bi-pencil-square"></i></a>
                 </td>
             </tr>

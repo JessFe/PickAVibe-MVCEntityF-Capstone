@@ -11,7 +11,7 @@
     @RenderSection("Styles", required: false)
 
 </head>
-@*<body class="@ViewBag.BodyClass">*@
+
 <body>
     @if (ViewBag.HideLayout != true)
     {
@@ -41,7 +41,7 @@
                                 @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm", @class = "nav-link p-0"}))
                                 {
                                     @Html.AntiForgeryToken()
-                                    <button type="submit" class="nav-link opacity-75" style="background-color: transparent; border: none; color: var(--cst-2);">Logout</button>
+                                    <button type="submit" class="nav-link opacity-75" style="background-color: transparent; border: none; color: var(--cst-2-lgt);">Logout</button>
                                 }
                             </li>
                         }
@@ -63,7 +63,7 @@
 
                 <hr />
                 <footer>
-                    <p>&copy; @DateTime.Now.Year - @Html.ActionLink("Pick A Vibe", "About", "Home", new { area = "" }, new { @class = "link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover link-underline-info" })</p>
+                    <p class="small">&copy; @DateTime.Now.Year - @Html.ActionLink("Pick A Vibe", "About", "Home", new { area = "" }, new { @class = "link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover link-underline-info" })</p>
                 </footer>
             </div>
 
