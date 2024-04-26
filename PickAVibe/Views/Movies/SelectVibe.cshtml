@@ -1,0 +1,49 @@
+﻿@using PickAVibe.Models
+@model List<Vibes>
+
+@*PickAVibe Step 2: Select your vibe *@
+
+@{
+    ViewBag.Title = "Your Vibe";
+    // Ottiene il valore di mood dalla query string
+    var mood = Request.QueryString["mood"]; 
+
+    // Metodo alternativo per ottenere la classe CSS in base al valore di mood
+    string getCardClassByMood(string moodParam)
+    {
+        if (moodParam == "happy") return "card-vibe-h";
+        else if (moodParam == "neutral") return "card-vibe-n";
+        else if (moodParam == "sad") return "card-vibe-s";
+        else if (moodParam == "angry") return "card-vibe-a";
+        else return "bg-secondary";
+    }
+}
+<h3 class="mov-title text-center mb-4 mt-1">@ViewBag.VibePhrase</h3>
+
+
+<div class="row justify-content-center">
+    @foreach (var vibe in Model)
+    {
+        // Applica la classe CSS in base al valore di mood
+        var cardClass = getCardClassByMood(mood);
+
+        <div class="col-11 col-sm-3 col-xl-2 my-2 my-sm-3 px-1 px-md-3">
+            <div class="@($"{cardClass}") d-flex justify-content-center align-items-center rounded-3 scale-up">                
+                <a href="/Movies/ShowMovies?vibeId=@vibe.VibeID" class="text-decoration-none">
+                    <div class="card-body text-center">
+                        <img src="@Url.Content($"~/Content/assets/vibeimg/{vibe.VibeID}.png")" alt="@vibe.VibeName Image" class="img-fluid" style="height: 15vh;">
+                    </div>
+                </a>
+            </div>
+            <a href="/Movies/ShowMovies?vibeId=@vibe.VibeID" class="text-decoration-none d-block text-light text-center fs-6 mov-title m-0 mt-1 mt-sm-3">
+                @vibe.VibeName
+            </a>
+
+        </div>
+    }
+</div>
+
+<div class="text-center mt-5">
+    <button class="btn btn-1 me-1" onclick="location.reload();"><i class="bi bi-arrow-clockwise"></i> Reroll</button>
+    <a class="btn btn-outline-1" href="@Url.Action("SelectMood", "Movies")"><i class="bi bi-arrow-left-short"></i> Pick Again</a>
+</div>

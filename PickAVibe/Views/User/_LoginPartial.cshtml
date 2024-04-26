@@ -1,0 +1,31 @@
+﻿@model PickAVibe.Models.LoginVM
+
+@*form di login*@
+
+@using (Html.BeginForm("Login", "User", FormMethod.Post, new { id = "loginForm", @class = "d-flex justify-content-center w-100" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="rounded-3 bg-glass position-relative w-100 mx-1 mx-lg-4 mx-xl-5 p-4">
+
+    <h2>Sign in</h2>
+
+        <div class="form-group mt-3">
+            @Html.LabelFor(m => m.UsernameOrEmail)
+            @Html.TextBoxFor(m => m.UsernameOrEmail, new { @class = "form-control bg-dark bg-opacity-25 text-white" })
+            @Html.ValidationMessageFor(m => m.UsernameOrEmail, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group mt-3">
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control bg-dark bg-opacity-25 text-white" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+
+        <button type="submit" class="btn btn-1 w-100 my-3">Sign in</button>
+
+    <p>Don't have an account? <a href="#" id="linkToRegister" class="link-info link-underline-light link-underline-opacity-25 link-offset-2">Sign up</a></p>
+
+</div>
+
+}

@@ -1,0 +1,113 @@
+﻿@section Styles {
+    <link rel="stylesheet" href="~/Content/assets/css/LoginRegister.css">
+}
+@model PickAVibe.Models.LoginVM
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@*animazione di sfondo*@
+<svg class="bokeh"
+     viewBox="0 0 10 10"
+     xmlns="http://www.w3.org/2000/svg">
+
+    <circle cx="10%" cy="85%" r="75%" />
+    <circle cx="45%" cy="50%" r="15%" />
+    <circle cx="85%" cy="35%" r="30%" />
+    <circle cx="60%" cy="85%" r="20%" />
+    <circle cx="45%" cy="50%" r="30%" />
+    <circle cx="35%" cy="25%" r="20%" />
+    <circle cx="90%" cy="-25%" r="35%" />
+    <circle cx="-15%" cy="30%" r="30%" />
+    <circle cx="65%" cy="85%" r="55%" />
+    <circle cx="45%" cy="50%" r="20%" />
+
+</svg>
+@* fine animazione di sfondo*@
+
+
+<div class="row" style="height: 100vh;">
+
+    <div class="col-12 col-md-5 col-lg-6 col-xl-7 d-flex align-items-end align-items-md-center">
+
+        <div class="mb-5 mx-2">
+            <h6 style="color: var(--cst-1)">Feel It, Watch It</h6>
+            <h2>Enter <span class="px-1" style="border-bottom: 3px solid var(--cst-1);">Pick-A-Vibe</span></h2>
+            <h5 class="text-light text-opacity-50">Let Emotions Drive Your Movie Experience!</h5>
+        </div>
+
+    </div>
+
+    <div id="formContainer" class="col-12 col-md-7 col-lg-6 col-xl-5 d-flex align-items-start align-items-md-center">
+
+    </div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    // Funzione per caricare il form richiesto
+    function loadForm(formName) {
+        $('#formContainer').load('/User/' + formName);
+    }
+
+    // Carica il form di login all'avvio
+    $(document).ready(function () {
+        loadForm("LoginPartial");
+
+        // Gestione del click sui link per cambiare form
+        $('body').on('click', '#linkToRegister', function (e) {
+            e.preventDefault();
+            loadForm("RegisterPartial");
+        });
+        $('body').on('click', '#linkToLogin', function (e) {
+            e.preventDefault();
+            loadForm("LoginPartial");
+        });
+
+        // Gestione dell'invio del form di login
+        $('body').on('submit', '#loginForm', function (e) {
+            e.preventDefault();
+            submitForm(this);
+        });
+
+        // Gestione dell'invio del form di registrazione
+        $('body').on('submit', '#registerForm', function (e) {
+            e.preventDefault();
+            submitForm(this);
+        });
+    });
+
+    // Funzione per inviare il form
+    function submitForm(form) {
+        const actionUrl = form.getAttribute('action');
+        const formData = new FormData(form);
+
+        fetch(actionUrl, {
+            method: 'POST',
+            body: formData,
+            credentials: 'same-origin'
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                // Controlla se la risposta è una pagina di reindirizzamento
+                if (response.redirected && response.url) {
+                    window.location.href = response.url;
+                } else {
+                    return response.text();
+                }
+            })
+            .then(html => {
+                if (html) {
+                    $('#formContainer').html(html);
+                }
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
+    }
+</script>

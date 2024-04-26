@@ -1,0 +1,83 @@
+﻿/* Gestione animazione sfondo della pagina di login e registrazione */
+
+body {
+    overflow: hidden;
+    background-color: #171717;
+}
+
+.bokeh {
+    height: 100vh;
+    width: 100vw;
+    background-color: #171717;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    filter: blur(50px);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    z-index: -100;
+}
+
+    .bokeh circle {
+        animation: rotate 20s linear infinite;
+        fill: #0fa3;
+        opacity: 0.53;
+        transform-origin: 50%;
+    }
+
+        .bokeh circle:nth-child(2n) {
+            fill: #a0f3;
+            transform-origin: 20% 110%;
+            animation-delay: -10s;
+            animation-duration: 13.772s;
+            opacity: 0.3;
+        }
+
+        .bokeh circle:nth-child(3n) {
+            opacity: 0.75;
+            fill: #0af3;
+            transform-origin: 70% 30%;
+            animation-delay: -5s;
+            animation-duration: 26.666s;
+        }
+
+        .bokeh circle:nth-child(4n) {
+            fill: #0aa3;
+            transform-origin: 110% 70%;
+            animation-delay: -6.6666666667s;
+            animation-duration: 15.9332s;
+        }
+
+        .bokeh circle:nth-child(5n) {
+            fill: #0073;
+            transform-origin: 30% 40%;
+        }
+
+        .bokeh circle:nth-child(6n) {
+            fill: #0fa3;
+            transform-origin: -10% 80%;
+            animation-delay: -26s;
+        }
+
+        .bokeh circle:nth-child(7n) {
+            fill: #a0f3;
+            transform-origin: 70% -10%;
+        }
+
+        .bokeh circle:nth-child(8n) {
+            fill: #0aa3;
+            transform-origin: -30% 50%;
+            animation-delay: -8s;
+        }
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

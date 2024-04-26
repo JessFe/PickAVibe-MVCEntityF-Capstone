@@ -1,0 +1,165 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+
+<div class="col-10 mx-auto mt-4">
+    @*-- about pickavibe --*@
+    <h5 class="m-0" style="color: var(--cst-2);">about</h5>
+    <h1>Pick A Vibe</h1>
+    <h4 class="text-light text-opacity-75">Movies That <span style="border-bottom: 2px solid var(--cst-1);">Feel Just Right</span> for You</h4>
+
+    <hr class="my-5" />
+
+    <div class="pb-3">
+        @*1*@
+        <h5 class="mb-3 mt-5"><span style="color: var(--cst-1);">Discover movies </span>that match your mood and desires.</h5>
+        <div class="row mx-2">
+            <div class="col-sm-4 mb-3 mb-sm-0">
+                <div class="card h-100" style="border: 1px solid var(--cst-1);">
+                    <div class="card-body d-flex px-2">
+                        <div>
+                            <span class="fs-3 pe-3 ps-1" style="color: var(--cst-2);">1.</span>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <h6 class="card-title">Choose Your Mood</h6>
+                            <p class="card-text small m-1">Start by telling us how you feel today.</p>
+                            <p class="card-text small m-1">Your mood helps us tailor a unique movie selection just for you.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card h-100" style="border: 1px solid var(--cst-1);">
+                    <div class="card-body d-flex px-2">
+                        <div>
+                            <span class="fs-3 pe-3 ps-1" style="color: var(--cst-2);">2.</span>
+                        </div>
+                        <div>
+                            <h6 class="card-title">Pick Your Vibe</h6>
+                            <p class="card-text small m-1">What are you in the mood for?</p>
+                            <p class="card-text small m-1">Choose a vibe that suits your current desire.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card h-100" style="border: 1px solid var(--cst-1);">
+                    <div class="card-body d-flex px-2">
+                        <div>
+                            <span class="fs-3 pe-3 ps-1" style="color: var(--cst-2);">3.</span>
+                        </div>
+                        <div>
+                            <h6 class="card-title">Your Movie Matches</h6>
+                            <p class="card-text small m-1">Enjoy a lineup of movies perfectly aligned with how you feel.</p>
+                            <p class="card-text small m-1">With each movie, you have the choice to:</p>
+                            <ul class="list-group">
+                                <li class="list-group-item border-0 small py-0">- Watch the Trailer</li>
+                                <li class="list-group-item border-0 small py-0">- Add to Your Watchlist</li>
+                                <li class="list-group-item border-0 small py-0">- Mark as Watched</li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*2*@
+        <h5 class="mb-3 mt-5">Access your <span style="color: var(--cst-1);">personal profile </span>to keep track of your movie journey.</h5>
+        <div class="row mx-2">
+            <div class="col-sm-4 mb-3 mb-sm-0">
+                <div class="card h-100" style="border: 1px solid var(--cst-1);">
+                    <div class="card-body d-flex px-2">
+                        <div>
+                            <span class="fs-3 pe-3 ps-1" style="color: var(--cst-2);">1.</span>
+                        </div>
+                        <div>
+                            <h6 class="card-title">Watchlist</h6>
+                            <p class="card-text small m-1">Easily manage your list of must-see movies.</p>
+                            <p class="card-text small m-1">Quickly view the total count of movies waiting to be watched.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card h-100" style="border: 1px solid var(--cst-1);">
+                    <div class="card-body d-flex px-2">
+                        <div>
+                            <span class="fs-3 pe-3 ps-1" style="color: var(--cst-2);">2.</span>
+                        </div>
+                        <div>
+                            <h6 class="card-title">Watched</h6>
+                            <p class="card-text small m-1">Keep a record of movies you’ve seen, organized by your personal ratings.</p>
+                            <p class="card-text small m-1">Update this list as your interests evolve.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card h-100" style="border: 1px solid var(--cst-1);">
+                    <div class="card-body d-flex px-2">
+                        <div>
+                            <span class="fs-3 pe-3 ps-1" style="color: var(--cst-2);">3.</span>
+                        </div>
+                        <div>
+                            <h6 class="card-title">Profile Cover</h6>
+                            <p class="card-text small m-1">Your profile features a dynamic cover that automatically updates to display your favorite movie.</p>
+                            <p class="card-text small m-1">Keep watching to see how it changes!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h5 class="text-light text-opacity-75 mt-5">Enjoy exploring a world of perfect movie picks that resonate with your emotions.</h5>
+
+    </div>
+
+    <div class="text-center">
+        <a class="btn btn-outline-1 px-4" href="@Url.Action("SelectMood", "Movies")">Pick A Vibe</a>
+    </div>
+
+    <hr class="my-4" />
+
+    @*-- about me --*@
+
+    <div class="w-100">
+
+        <div>
+            <h5 class="text-end mb-3 mt-5">Made with 💚 by <span class="mov-title fs-4 fw-bold px-2" style="color: var(--cst-1);">Jess</span></h5>
+            <div class="row d-flex justify-content-end">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                    <div class="card h-100" style="border: 1px solid var(--cst-1);">
+                        <div class="card-body d-flex">
+
+                            <div>
+                                <h6 class="card-title mt-2 mb-3">Hey there! <span class="fw-bold" style="color: var(--cst-1);">I'm Jess</span>, the developer behind <span class="fw-bold" style="color: var(--cst-1);">PickAVibe</span>.</h6>
+                                <p class="card-text small text-light text-opacity-75 m-2">
+                                    In love with coding and turning ideas into digital realities, <br />
+                                    I created this app to merge my interests in movies and development, <br />
+                                    providing a unique platform to discover movies that perfectly match your mood and vibe.
+                                </p>
+                                <p class="card-text small text-light text-opacity-75 m-2">
+                                    Whether you're looking for movie recommendations <br />
+                                    or have any feedback or suggestions on how to enhance the app, <br />
+                                    feel free to reach out!
+                                </p>
+                                <a href="https://github.com/JessFe" class="btn btn-1 btn-sm m-1" target="_blank">
+                                    <i class="bi bi-github fs-6 me-1"></i> github.com/<span class="fs-6 fw-semibold">JessFe</span>
+                                </a>
+                                <a href="https://linkedin.com/in/jessica-ferro-dev" class="btn btn-1 btn-sm m-1" target="_blank">
+                                    <i class="bi bi-linkedin fs-6 me-1"></i> linkedin.com/in/<span class="fs-6 fw-semibold">jessica-ferro-dev</span>
+                                </a>
+                                <p class="card-text small text-light text-opacity-75 m-2">
+                                    I hope you enjoy using <span class="fw-bold" style="color: var(--cst-1);">PickAVibe</span> as much as I enjoyed creating it!
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,37 @@
+﻿@model PickAVibe.Models.BackofficeVM
+
+@{
+    ViewBag.Title = "Movies Management";
+}
+
+<h3 class="mov-title">Movies Management</h3>
+
+<div class="row">
+
+    <div class="col-12 d-flex justify-content-end">
+        <a href="@Url.Action("AddMovie")" class="btn btn-1 btn-sm px-3"><i class="bi bi-plus-square"></i> New Movie</a>
+    </div>
+
+    <div class="col-12 my-3">
+        <div class="card card-1 scale-up">
+            <a href="@Url.Action("AllMovies")" class="text-decoration-none">
+                <div class="card-body">
+                    <p class="font-monospace text-light fs-5 text-center m-0">All Movies (@Model.TotalMovies)</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    @foreach (var vibe in Model.Vibes)
+    {
+        <div class="col-3 my-2">
+            <div class="card card-1 scale-up">
+                <a href="@Url.Action("MoviesByVibe", "Backoffice", new { vibeId = vibe.VibeID })" class="text-decoration-none">
+                    <div class="card-body">
+                        <p class="font-monospace text-light fs-5 text-center m-0">@vibe.VibeName (@vibe.MoviesCount)</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+</div> 

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<PickAVibe.Models.Movies>
+
+@{
+    ViewBag.Title = "Watchlist";
+}
+
+@Html.Partial("_ProfileModalDelMovie")
+@Html.Partial("_RatingModal")
+
+<h3 class="mov-title">Watchlist</h3>
+
+@using (Html.BeginForm("Watchlist", "Profile", FormMethod.Get))
+{
+    <p class="d-flex align-items-center">
+        <span class="me-2">Search: </span>@Html.TextBox("searchString")
+        <input type="submit" value="Search" class="btn btn-1 btn-sm ms-2" />
+    </p>
+}
+
+@foreach (var movie in Model)
+{
+    <div class="row my-4">
+        <div class="col-3">
+            <img src="@Url.Content("~/Content/assets/posterimg/" + movie.PosterImg)" alt="@movie.Title poster" class="rounded-3" style="width: 100%;" />
+
+        </div>
+        <div class="col-9">
+            <h3 class="mov-title">@movie.Title</h3>
+            <span class="badge text-bg-1 m-0">@movie.Year</span>
+            <span class="mx-1">•</span>
+            <span class="badge text-bg-1">@movie.Duration min</span>
+            
+            <p class="my-3">@movie.Description</p>
+
+            @if (!String.IsNullOrEmpty(movie.TrailerURL))
+            {
+                <a href="#" class="btn btn-1 btn-sm watch-trailer" data-bs-toggle="modal" data-bs-target="#trailerModal" data-trailer-url="@movie.TrailerURL"><i class="bi bi-play"></i> Trailer</a>
+            }
+            <button class="btn btn-outline-1 btn-sm add-to-watched" data-id="@movie.MovieID" data-bs-toggle="modal" data-bs-target="#ratingModal"><i class="bi bi-bookmark-check"></i> Watched</button>
+            <!-- Pulsante per l'eliminazione, con attributo data-id per identificare il film -->
+            <button class="btn btn-outline-2 btn-sm delete-button" data-id="@movie.MovieID" data-action-url="@Url.Action("DeleteFromWatchlist", "Profile")" data-toggle="modal" data-target="#deleteModal"><i class="bi bi-bookmark-x"></i> Delete</button>
+
+        </div>
+    </div>
+}
+
+<a href="@Url.Action("Index", "Profile")" class="btn btn-1 btn-sm"><i class="bi bi-arrow-left-short"></i> Profile</a>
+
+
+@Html.Partial("_TrailerModal")
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="~/Scripts/Profile-ModalDelMovie.js"></script>
+<script src="~/Scripts/WatchedRatingModal.js"></script>
+<script src="~/Scripts/TrailerModal.js"></script>

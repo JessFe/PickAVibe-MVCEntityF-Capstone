@@ -1,0 +1,102 @@
+﻿@model PickAVibe.Models.Movies
+
+@{
+    ViewBag.Title = "Movie Deatils";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+
+        <div class="card mb-3">
+
+            @if (!string.IsNullOrEmpty(Model.PosterImg))
+            {
+                <div class="image-container position-relative overflow-hidden rounded-top-3" style="height: 200px; ">
+
+                    <img src="@Url.Content("~/Content/assets/posterimg/" + Model.PosterImg)" alt="Poster" class="card-img-top position-absolute" style="top: -15px;" />
+                </div>
+            }
+
+            <div class="card-body">
+                <h4 class="card-title mov-title">@Model.Title</h4>
+
+                <table class="font-monospace">
+                    <tbody>
+                        <tr class="border-bottom">
+                            <td class="opacity-50 align-top pe-3 py-2">
+                                Year:
+                            </td>
+                            <td class="py-2">
+                                <p class="card-text small m-0">@Model.Year</p>
+                            </td>
+                        </tr>
+                        <tr class="border-bottom">
+                            <td class="opacity-50 align-top pe-3 py-2">
+                                Time:
+                            </td>
+                            <td class="py-2">
+                                <p class="card-text">@Model.Duration'</p>
+                            </td>
+                        </tr>
+                        <tr class="border-bottom">
+                            <td class="opacity-50 align-top pe-3 py-2">
+                                Story:
+                            </td>
+                            <td class="py-2">
+                                <p class="card-text">@Model.Description</p>
+                            </td>
+                        </tr>
+                        <tr class="border-bottom">
+                            <td class="opacity-50 align-top pe-3 py-2">
+                                Trailer:
+                            </td>
+                            <td class="py-2">
+                                @if (!string.IsNullOrEmpty(Model.TrailerURL))
+                                {
+                                    <p class="card-text">@Model.TrailerURL</p>
+
+                                    <iframe class="rounded-3" width="auto" height="200px" src="@Model.TrailerURL" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                                }
+                            </td>
+                        </tr>
+                        <tr class="border-bottom">
+                            <td class="opacity-50 align-top pe-3 py-2">
+                                Vibes:
+                            </td>
+                            <td class="py-2">
+                                @if (ViewBag.Vibes != null)
+                                {
+                                    <ul>
+                                        @foreach (var vibe in ViewBag.Vibes)
+                                        {
+                                            <li>@vibe</li>
+                                        }
+                                    </ul>
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="d-flex justify-content-center mt-3">
+                    <a href="@Url.Action("EditMovie", "Backoffice", new { id = Model.MovieID })" class="btn btn-1 btn-sm me-2">Edit</a>
+                    <button id="goBackButton" class="btn btn-outline-1 btn-sm"><i class="bi bi-arrow-left-short"></i> Back</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    // Funzione per tornare indietro
+    $(document).ready(function () {
+        $('#goBackButton').click(function () {
+            window.history.back();
+        });
+    });
+</script>

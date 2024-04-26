@@ -1,0 +1,102 @@
+﻿@model IEnumerable<PickAVibe.Models.Movies>
+
+@{
+    ViewBag.Title = ViewBag.VibeName ?? "All Movies";
+}
+
+<h3 class="mov-title">@(ViewBag.VibeName ?? "All Movies")</h3>
+
+
+@using (Html.BeginForm(ViewBag.VibeID == null ? "AllMovies" : "MoviesByVibe", "Backoffice", FormMethod.Get))
+{
+    if (ViewBag.VibeID != null)
+    {
+        <input type="hidden" name="vibeId" value="@ViewBag.VibeID" />
+    }
+
+    <div class="d-flex justify-content-between">
+        <p class="d-flex align-items-center m-0">
+            <span class="me-2">Search: </span>
+            @Html.TextBox("searchString")
+            <input type="submit" value="Search" class="btn btn-1 btn-sm ms-2" />
+        </p>
+        <div>
+            <button id="goBackButton" class="btn btn-outline-1 btn-sm">
+                <i class="bi bi-arrow-left-short"></i> Back
+            </button>
+            <a href="@Url.Action("AddMovie")" class="btn btn-1 btn-sm px-3"><i class="bi bi-plus-square"></i> New Movie</a>
+        </div>
+
+    </div>
+}
+
+<table class="table my-3">
+    <thead>
+        <tr class="rounded-3">
+            <th class="rounded-start-3">@Html.DisplayNameFor(model => model.Title)</th>
+            <th>Year</th>
+            <th>Time</th>
+            <th>Story</th>
+            <th>Poster</th>
+            <th>Trailer</th>
+            <th class="rounded-end-3"><i class="bi bi-gear"></i></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td class="mov-title ps-3">@Html.DisplayFor(modelItem => movie.Title)</td>
+
+                <td class="text-light text-opacity-50 small font-monospace">@movie.Year</td>
+                <td class="text-light text-opacity-50 small font-monospace">@movie.Duration'</td>
+                <td class="small font-monospace">
+                    @if (movie.Description.Length > 75)
+                    {
+                        @Html.Raw(HttpUtility.HtmlEncode(movie.Description.Substring(0, 75)) + "...")
+                    }
+                    else
+                    {
+                        @movie.Description
+                    }
+                </td>
+                <td>
+                    @if (movie.PosterImg != null)
+                    {
+                        <i class="bi bi-check-square text-success"></i>
+                    }
+                    else
+                    {
+                        <i class="bi bi-x-square text-danger"></i>
+                    }
+                </td>
+                <td>
+                    @if (movie.TrailerURL != null)
+                    {
+                        <i class="bi bi-check-square text-success"></i>
+                    }
+                    else
+                    {
+                        <i class="bi bi-x-square text-danger"></i>
+                    }
+                </td>
+                <td>
+                    <a href="@Url.Action("DetailsMovie", "Backoffice", new { id = movie.MovieID })" class="btn btn-1 btn-sm"><i class="bi bi-info-square"></i></a>
+                    <a href="@Url.Action("EditMovie", "Backoffice", new { id = movie.MovieID })" class="btn btn-outline-1 btn-sm"><i class="bi bi-pencil-square"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    // Funzione per tornare indietro
+    $(document).ready(function () {
+        $('#goBackButton').click(function (e) {
+            e.preventDefault();
+            window.history.back();
+        });
+    });
+</script>

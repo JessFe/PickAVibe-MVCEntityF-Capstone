@@ -1,0 +1,44 @@
+﻿@model IEnumerable<PickAVibe.Models.WatchedMoviesVM>
+
+@{
+    ViewBag.Title = "Watched";
+}
+
+@Html.Partial("_ProfileModalDelMovie")
+@Html.Partial("_RatingModal")
+
+
+<h3 class="mov-title">Watched</h3>
+
+@using (Html.BeginForm("Watched", "Profile", FormMethod.Get))
+{
+    <p class="d-flex align-items-center">
+        <span class="me-2">Search: </span>@Html.TextBox("searchString")
+        <input type="submit" value="Search" class="btn btn-1 btn-sm ms-2" />
+    </p>
+}
+
+@foreach (var item in Model)
+{
+    <div class="row my-4">
+
+        <div class="col-3">
+            <img src="@Url.Content("~/Content/assets/posterimg/" + item.Movie.PosterImg)" alt="@item.Movie.Title poster" class="rounded-3" style="width: 100%;" />
+
+        </div>
+        <div class="col-9">
+            <h3 class="mov-title m-0">@item.Movie.Title</h3>
+            <span class="badge text-bg-1 m-0">@item.Movie.Year</span>
+            <p class="my-3">Your rating: @(item.Rating / 10.0)</p>
+            <button class="btn btn-1 btn-sm edit-rating" data-id="@item.Movie.MovieID" data-current-rating="@item.Rating" data-bs-toggle="modal" data-bs-target="#ratingModal"><i class="bi bi-pencil"></i> Rating</button>
+            <button class="btn btn-outline-1 btn-sm move-back-to-watchlist" data-id="@item.Movie.MovieID">Move Back to Watchlist</button>
+            <button class="btn btn-outline-2 btn-sm delete-button" data-id="@item.Movie.MovieID" data-action-url="@Url.Action("DeleteFromWatched", "Profile")" data-toggle="modal" data-target="#deleteModal"><i class="bi bi-bookmark-x"></i> Delete</button>
+        </div>
+    </div>
+}
+
+<a href="@Url.Action("Index", "Profile")" class="btn btn-1 btn-sm"><i class="bi bi-arrow-left-short"></i> Profile</a>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="~/Scripts/Profile-ModalDelMovie.js"></script>
+<script src="~/Scripts/WatchedRatingModal.js"></script>

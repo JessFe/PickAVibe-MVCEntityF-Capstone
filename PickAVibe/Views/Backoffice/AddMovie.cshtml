@@ -1,0 +1,155 @@
+﻿@model PickAVibe.Models.Movies
+
+@{
+    ViewBag.Title = "New Movie";    
+}
+
+@using (Html.BeginForm("AddMovie", "Backoffice", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4 class="mov-title">New Movie</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row">
+            <div class="col-6">
+                <!-- Title -->
+                <div class="form-group mt-3">
+                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label font-monospace col-md-2 mb-1" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <!-- Year -->
+                <div class="form-group mt-3">
+                    @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label font-monospace col-md-2 mb-1" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <!-- Duration -->
+                <div class="form-group mt-3">
+                    @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label font-monospace col-md-2 mb-1" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="form-group mt-3">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label font-monospace col-md-2 mb-1" })
+                    <div class="col-md-10 text-end">
+                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control mb-1", id = "descriptionTextArea", rows = "4" })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        <!-- Contatore di caratteri -->
+                        <span class="font-monospace" id="charCount">0/250</span>
+                    </div>
+                </div>
+
+                <!-- PosterImg -->
+                <div class="form-group mt-3">
+                    @Html.LabelFor(model => model.PosterImg, new { @class = "control-label font-monospace col-md-2 mb-1" })
+                    <div class="col-md-10">
+                        <input type="file" name="posterFile" accept="image/*" class="form-control font-monospace" />
+                        @Html.ValidationMessageFor(model => model.PosterImg, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <!-- TrailerURL -->
+                <div class="form-group mt-3">
+                    @Html.LabelFor(model => model.TrailerURL, htmlAttributes: new { @class = "control-label font-monospace col-md-2 mb-1" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TrailerURL, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TrailerURL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-6 d-flex align-items-center">
+
+                <!-- Vibes -->
+                <div class="form-group mt-3 w-100">
+                    @Html.Label("Vibes", htmlAttributes: new { @class = "control-label font-monospace col-md-2 mb-1" })
+                    <div class="col-md-10 mt-2">
+                        <div class="row">
+                            @{
+                                var vibesList = ViewBag.VibeID as IEnumerable<SelectListItem>;
+                                var halfwayPoint = (int)Math.Ceiling(vibesList.Count() / 2.0); // Arrotondamento verso l'alto
+                                var firstHalf = vibesList.Take(halfwayPoint).ToList(); // Prima metà della lista
+                                var secondHalf = vibesList.Skip(halfwayPoint).ToList(); // Seconda metà della lista
+                            }
+                            <div class="col-md-6">
+                                @foreach (var item in firstHalf)
+                                {
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="SelectedVibes" value="@item.Value" /> @item.Text
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-md-6">
+                                @foreach (var item in secondHalf)
+                                {
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="SelectedVibes" value="@item.Value" /> @item.Text
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mt-5">
+            <div class="col-md-offset-2 col-md-12 d-flex justify-content-center">
+                <button type="submit" class="btn btn-1 btn-sm me-2">
+                    <i class='bi bi-check-lg'></i> Save
+                </button>
+                <button id="goBackButton" class="btn btn-outline-1 btn-sm">
+                    <i class="bi bi-arrow-left-short"></i> Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    // Funzione per tornare indietro
+    $(document).ready(function () {
+        $('#goBackButton').click(function (e) {
+            e.preventDefault();
+            window.history.back();
+        });
+
+        // Contatore di caratteri per la descrizione
+        var maxChars = 250;
+        $('#descriptionTextArea').on('input', function () {
+            var textLength = $(this).val().length;
+            var textRemaining = maxChars - textLength;
+            $('#charCount').text(textLength + '/' + maxChars);
+
+            // Cambia colore quando si avvicina o si supera il limite
+            if (textRemaining < 0) {
+                $('#charCount').css('color', 'var(--cst-2)');
+            } else if (textRemaining <= 50) {
+                $('#charCount').css('color', '#FFAA42');
+            } else {
+                $('#charCount').css('color', 'var(--cst-1)');
+            }
+        });
+    });
+</script>
