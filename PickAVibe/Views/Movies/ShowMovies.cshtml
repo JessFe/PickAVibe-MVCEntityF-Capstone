@@ -29,7 +29,7 @@
                 var movie = Model[i];
                 <div class="carousel-item @(i == 0 ? "active" : "")">
                     <div class="darkgradient"></div>
-                    <img src="~/Content/assets/posterimg/@movie.PosterImg" class="d-block w-100" alt="@movie.Title" />
+                    <img src="~/Content/assets/posterimg/@(string.IsNullOrEmpty(movie.PosterImg) ? "00000.png" : movie.PosterImg)" class="d-block w-100" alt="@movie.Title" />
                     <div class="carousel-caption d-block text-start text-white pe-4">
                         
 
@@ -129,7 +129,7 @@
                 var movie = Model[i];
                 <div class="carousel-item @(i == 0 ? "active" : "")">
                     
-                    <img src="~/Content/assets/posterimg/@movie.PosterImg" class="d-block w-100" alt="@movie.Title" />
+                    <img src="~/Content/assets/posterimg/@(string.IsNullOrEmpty(movie.PosterImg) ? "00000.png" : movie.PosterImg)" class="d-block w-100" alt="@movie.Title" />
                     <div class="carousel-caption d-block text-start text-white bg-dark bg-opacity-25 rounded-3 position-static px-3 pe-4 pt-5">
 
                                                
