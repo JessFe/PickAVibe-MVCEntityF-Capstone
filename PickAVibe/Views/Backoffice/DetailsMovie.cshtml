@@ -11,9 +11,9 @@
 
             @if (!string.IsNullOrEmpty(Model.PosterImg))
             {
-                <div class="image-container position-relative overflow-hidden rounded-top-3" style="height: 200px; ">
+                <div class="image-container position-relative overflow-hidden banner-cont rounded-top-3">
 
-                    <img src="@Url.Content("~/Content/assets/posterimg/" + Model.PosterImg)" alt="Poster" class="card-img-top position-absolute" style="top: -15px;" />
+                    <img src="@Url.Content("~/Content/assets/posterimg/" + Model.PosterImg)" alt="Poster" class="card-img-top position-absolute banner-img" />
                 </div>
             }
 
