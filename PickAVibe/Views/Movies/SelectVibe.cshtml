@@ -11,10 +11,10 @@
     // Metodo alternativo per ottenere la classe CSS in base al valore di mood
     string getCardClassByMood(string moodParam)
     {
-        if (moodParam == "happy") return "card-vibe-h";
-        else if (moodParam == "neutral") return "card-vibe-n";
-        else if (moodParam == "sad") return "card-vibe-s";
-        else if (moodParam == "angry") return "card-vibe-a";
+        if (moodParam == "happy") return "card-h card-vibe-h";
+        else if (moodParam == "neutral") return "card-n card-vibe-n";
+        else if (moodParam == "sad") return "card-s card-vibe-s";
+        else if (moodParam == "angry") return "card-a card-vibe-a";
         else return "bg-secondary";
     }
 }
@@ -28,7 +28,7 @@
         var cardClass = getCardClassByMood(mood);
 
         <div class="col-11 col-sm-3 col-xl-2 my-2 my-sm-3 px-1 px-md-3">
-            <div class="@($"{cardClass}") d-flex justify-content-center align-items-center rounded-3 scale-up">                
+            <div class="@($"{cardClass}") card-vibe d-flex justify-content-center align-items-center rounded-3 scale-up">                
                 <a href="/Movies/ShowMovies?vibeId=@vibe.VibeID" class="text-decoration-none">
                     <div class="card-body text-center">
                         <img src="@Url.Content($"~/Content/assets/vibeimg/{vibe.VibeID}.png")" alt="@vibe.VibeName Image" class="img-fluid" style="height: 15vh;">

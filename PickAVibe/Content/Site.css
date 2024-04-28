@@ -135,35 +135,43 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/*CARDS VIBE*/
+/*CARDS MOOD-VIBE*/
 .card-vibe {
     background-size: cover;
     background-position: center;   
     height: 18vh;
     }
 
-.card-vibe-h {
-    background-color: #2AbD6Fee;
-    background-image: url(../Content/assets/vibeimg/happy.png);
+.card-h {
     border: 3px solid rgba(42,189,111);
 }
 
-.card-vibe-n {
-    background-color: #E9C46Aee;
-    background-image: url(../Content/assets/vibeimg/neutral.png);
+.card-vibe-h {
+    background: radial-gradient(circle, rgba(42,189,111,0.7) 40%, rgba(42,189,111,0.3) 100%);
+}
+
+.card-n {
     border: 3px solid rgba(233,196,106);
 }
 
-.card-vibe-s {
-    background-color: #2A8FADee;
-    background-image: url(../Content/assets/vibeimg/sad.png);
+.card-vibe-n {
+    background: radial-gradient(circle, rgba(233,196,106,0.7) 40%, rgba(233,196,106,0.3) 100%);
+}
+
+.card-s {
     border: 3px solid rgba(42,143,173);
 }
 
-.card-vibe-a {
-    background-color: #E76F51ee;
-    background-image: url(../Content/assets/vibeimg/angry.png);
+.card-vibe-s {
+    background: radial-gradient(circle, rgba(42,143,173,0.7) 40%, rgba(42,143,173,0.3) 100%);
+}
+
+.card-a {
     border: 3px solid rgba(231,111,81);
+}
+
+.card-vibe-a {
+    background: radial-gradient(circle, rgba(231,111,81,0.7) 40%, rgba(231,111,81,0.3) 100%);
 }
 
 /*CAROUSEL*/
